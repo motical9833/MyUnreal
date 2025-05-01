@@ -3,6 +3,7 @@
 #include "MyUnrealProjectGameMode.h"
 #include "MyUnrealProjectCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "MyUnrealProject.h"
 
 AMyUnrealProjectGameMode::AMyUnrealProjectGameMode()
 {
