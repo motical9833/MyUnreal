@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 ARPGPlayer::ARPGPlayer()
@@ -18,7 +19,7 @@ ARPGPlayer::ARPGPlayer()
 	{
 		GetMesh()->SetSkeletalMesh(tempMesh.Object);
 		// 2. Mesh 컴포넌트의 위치와 회전값을 설정
-		GetMesh()->SetRelativeLocationAndRotation(FVector(0, 0, -90), FRotator(0, -90, 0));
+		GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -90.0f), FRotator(0.0f, -90.0f, 0.0f));
 	}
 
 	// 카메라 붙이기
@@ -36,7 +37,12 @@ ARPGPlayer::ARPGPlayer()
 	rpgCamComp = CreateDefaultSubobject<UCameraComponent>(TEXT("RpgCamComp"));
 	rpgCamComp->SetupAttachment(springArmComp);
 	rpgCamComp->bUsePawnControlRotation = false;
-	rpgCamComp->SetRelativeLocationAndRotation(FVector(500, 700, 200), FRotator(-30, -90, 0));
+	rpgCamComp->SetRelativeLocationAndRotation(FVector(500.0f, 900.0f, 300.0f), FRotator(-20.0f, -90.0f, 0.0f));
+
+	// CharacterMovement 조절
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	// Yaw 기준 초당 720도 회전
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
 }
 
 // Called when the game starts or when spawned
