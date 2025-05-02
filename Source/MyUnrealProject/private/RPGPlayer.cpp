@@ -4,6 +4,7 @@
 #include "RPGPlayer.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 ARPGPlayer::ARPGPlayer()
@@ -23,21 +24,25 @@ ARPGPlayer::ARPGPlayer()
 	// 카메라 붙이기
 	// springArm 컴포넌트 붙이기
 	springArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
-	springArmComp->SetupAttachment(RootComponent);
-	springArmComp->SetRelativeLocationAndRotation(FVector(0, 600, 200),FRotator(-30,-90,0));
+	springArmComp->SetupAttachment(GetCapsuleComponent());
 	springArmComp->TargetArmLength = 500;
+	springArmComp->bUsePawnControlRotation = false;
+	springArmComp->bInheritYaw = false;
+	springArmComp->bInheritPitch = false;
+	springArmComp->bInheritRoll = false;
+
 
 	// camera 컴포넌트 붙이기
 	rpgCamComp = CreateDefaultSubobject<UCameraComponent>(TEXT("RpgCamComp"));
 	rpgCamComp->SetupAttachment(springArmComp);
-
+	rpgCamComp->bUsePawnControlRotation = false;
+	rpgCamComp->SetRelativeLocationAndRotation(FVector(500, 700, 200), FRotator(-30, -90, 0));
 }
 
 // Called when the game starts or when spawned
 void ARPGPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
