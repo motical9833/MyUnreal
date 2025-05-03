@@ -6,6 +6,8 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "PlayerAnim.h"
+#include "MyUnrealProject.h"
 
 // Sets default values
 ARPGPlayer::ARPGPlayer()
@@ -49,6 +51,13 @@ ARPGPlayer::ARPGPlayer()
 void ARPGPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// PlayerAnim 가져오기
+	playerAnim = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
+	if (!playerAnim)
+	{
+		PRINT_LOG(TEXT("%s"), TEXT("Non playerAnim"));
+	}
 }
 
 // Called every frame
@@ -73,6 +82,8 @@ void ARPGPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	PlayerInputComponent->BindAxis(TEXT("Vertical"), this, &ARPGPlayer::InputVertical);
 	// 점프 입력 이벤트 처리 함수 바인딩
 	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ARPGPlayer::InputJump);
+	// 회피 입력 이벤트 처리 함수 바인딩
+	PlayerInputComponent->BindAction(TEXT("Evasion"), IE_Pressed, this, &ARPGPlayer::InputEvasion);
 }
 
 // 좌우 입력 이벤트 처리 함수
@@ -92,3 +103,7 @@ void ARPGPlayer::InputJump()
 	Jump();
 }
 
+void ARPGPlayer::InputEvasion()
+{
+	playerAnim->StartEvasionAnimation();
+}

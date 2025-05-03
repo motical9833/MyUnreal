@@ -21,12 +21,18 @@ public:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 public:
+	void StartEvasionAnimation();
+	bool GetIsEvasion() { return isEvasion; }
+public:
+	UFUNCTION(BlueprintCallable, Category = "FSMEvent")
+	void EndEvasionAnimation();
+
+public:
 	// 플레이어
 	UPROPERTY()
 	ARPGPlayer* player;
 	UPROPERTY()
 	UCharacterMovementComponent* movement;
-
 	// 플레이어 속도
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
 	float speed = 0;

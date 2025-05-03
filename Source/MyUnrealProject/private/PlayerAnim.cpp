@@ -6,7 +6,6 @@
 #include "MyUnrealProject.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-
 void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 {
 	if (!player)
@@ -35,4 +34,14 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 		// 플레이어가 현재 공중에 있는지 체크
 		isInAir = movement->IsFalling();
 	}
+}
+
+void UPlayerAnim::StartEvasionAnimation()
+{
+	isEvasion = true;
+}
+
+void UPlayerAnim::EndEvasionAnimation()
+{
+	isEvasion = false;
 }

@@ -33,16 +33,20 @@ public:
 	void InputVertical(float value);
 	// 점프 입력 이벤트 처리 함수
 	void InputJump();
+	// 회피 입력 이벤트 처리 함수
+	void InputEvasion();
 
 public:
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	class USpringArmComponent* springArmComp;
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	class UCameraComponent* rpgCamComp;
+	UPROPERTY()
+	class UPlayerAnim* playerAnim;
 
 	// 이동 속도
 	UPROPERTY(EditAnywhere, Category = "PlayerSetting")
 	float moveSpeed = 600;
 	// 이동 방향
-	FVector direction;	
+	FVector direction;
 };
