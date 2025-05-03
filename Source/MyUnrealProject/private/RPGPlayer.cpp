@@ -71,6 +71,8 @@ void ARPGPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	PlayerInputComponent->BindAxis(TEXT("Horizontal"), this, &ARPGPlayer::InputHorizontal);
 	// 상하 입력 이벤트 처리 함수 바인딩
 	PlayerInputComponent->BindAxis(TEXT("Vertical"), this, &ARPGPlayer::InputVertical);
+	// 점프 입력 이벤트 처리 함수 바인딩
+	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ARPGPlayer::InputJump);
 }
 
 // 좌우 입력 이벤트 처리 함수
@@ -83,5 +85,10 @@ void ARPGPlayer::InputHorizontal(float value)
 void ARPGPlayer::InputVertical(float value)
 {
 	direction.Y = value;
+}
+
+void ARPGPlayer::InputJump()
+{
+	Jump();
 }
 

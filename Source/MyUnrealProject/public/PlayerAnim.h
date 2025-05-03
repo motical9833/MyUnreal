@@ -14,6 +14,9 @@ class MYUNREALPROJECT_API UPlayerAnim : public UAnimInstance
 {
 	GENERATED_BODY()
 	
+public:
+	// 매 프레임 갱신되는 함수
+	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 public:
 	// 플레이어 속도
@@ -21,11 +24,17 @@ public:
 	float speed = 0;
 	// 점프 상태인지
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
-	bool bJump = false;
+	bool isInAir = false;
+	// 정프중 하강 상태인지
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
+	bool isFallingDown = false;
 	// 뛰는 상태인지
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
-	bool bRun = false;
+	bool isRun = false;
 	// 경직 상태인지
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
-	bool bStagger = false;
+	bool isStagger = false;
+	// 회피 상태인지
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
+	bool isEvasion = false;
 };

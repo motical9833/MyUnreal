@@ -31,6 +31,8 @@ public:
 	void InputHorizontal(float value);
 	// 상하 입력 이벤트 처리 함수
 	void InputVertical(float value);
+	// 점프 입력 이벤트 처리 함수
+	void InputJump();
 
 public:
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
