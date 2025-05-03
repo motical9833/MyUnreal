@@ -9,11 +9,19 @@
 
 void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 {
-	// 플레이어 이동 속도를 가져와 speed에 할당
-	// 폰 얻어 오기
-	auto ownerPawn = TryGetPawnOwner();
-	// 플레이어로 캐스팅
-    auto player = Cast<ARPGPlayer>(ownerPawn);
+	if (!player)
+	{
+		// 플레이어 이동 속도를 가져와 speed에 할당
+        // 폰 얻어 오기
+		auto ownerPawn = TryGetPawnOwner();
+		// 플레이어로 캐스팅
+		player = Cast<ARPGPlayer>(ownerPawn);
+
+		if (player)
+		{
+			movement = player->GetCharacterMovement();
+		}
+	}
 
 	// 캐스팅 성공
 	if (player)
@@ -25,7 +33,6 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 		//PRINT_LOG(TEXT("My Log : %f"), speed);
 
 		// 플레이어가 현재 공중에 있는지 체크
-		auto movement = player->GetCharacterMovement();
 		isInAir = movement->IsFalling();
 	}
 }
