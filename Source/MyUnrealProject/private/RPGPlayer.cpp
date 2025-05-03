@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "PlayerAnim.h"
 #include "MyUnrealProject.h"
+#include "TimerManager.h"
 
 // Sets default values
 ARPGPlayer::ARPGPlayer()
@@ -105,5 +106,18 @@ void ARPGPlayer::InputJump()
 
 void ARPGPlayer::InputEvasion()
 {
-	playerAnim->StartEvasionAnimation();
+	// ÄðÅ¸ÀÓ
+	if (!isDvasion)
+	{
+		isDvasion = true;
+		playerAnim->StartEvasionAnimation();
+		coolDownRemaining = delayDvasionTime;
+		GetWorldTimerManager().SetTimer(coolDownTimerHandle, this, &ARPGPlayer::ResetCoolDown, delayDvasionTime, false);
+	}
+}
+
+void ARPGPlayer::ResetCoolDown()
+{
+	isDvasion = false;
+	coolDownRemaining = 0.0f;
 }

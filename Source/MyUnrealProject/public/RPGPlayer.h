@@ -35,6 +35,8 @@ public:
 	void InputJump();
 	// 회피 입력 이벤트 처리 함수
 	void InputEvasion();
+	// 쿨타임 리셋
+	void ResetCoolDown();
 
 public:
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
@@ -49,4 +51,11 @@ public:
 	float moveSpeed = 600;
 	// 이동 방향
 	FVector direction;
+	// 회피 후딜레이
+	UPROPERTY(EditAnywhere, Category = "PlayerSetting")
+	float delayDvasionTime = 2.0f;
+	float coolDownRemaining = 0.0f;
+	bool isDvasion = false;
+	FTimerHandle coolDownTimerHandle;
+
 };
