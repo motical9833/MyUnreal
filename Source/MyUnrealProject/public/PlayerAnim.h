@@ -23,10 +23,11 @@ public:
 public:
 	void StartEvasionAnimation();
 	bool GetIsEvasion() { return isEvasion; }
+	void InVulEnd() { isInvul = false; }
+	void InVulStart() { isInvul = true; }
 public:
 	UFUNCTION(BlueprintCallable, Category = "FSMEvent")
 	void EndEvasionAnimation();
-
 public:
 	// 플레이어
 	UPROPERTY()
@@ -51,4 +52,7 @@ public:
 	// 회피 상태인지
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
 	bool isEvasion = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
+	// 무적 상태인지
+	bool isInvul = false;
 };

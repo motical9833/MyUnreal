@@ -37,7 +37,13 @@ public:
 	void InputEvasion();
 	// 쿨타임 리셋
 	void ResetCoolDown();
+	// 대쉬 시작
+	void StartDash();
+	// 대쉬 끝
+	void StopDash();
 
+
+	//UFUNCTION(BlueprintCallable, Category = "FSMEvent")
 public:
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	class USpringArmComponent* springArmComp;
@@ -53,9 +59,13 @@ public:
 	FVector direction;
 	// 회피 후딜레이
 	UPROPERTY(EditAnywhere, Category = "PlayerSetting")
-	float delayDvasionTime = 2.0f;
+	float delayDvasionTime = 1.0f;
 	float coolDownRemaining = 0.0f;
 	bool isDvasion = false;
 	FTimerHandle coolDownTimerHandle;
-
+	// 회피 이동
+	float dashSpeed = 400.0f;
+	float dashDuration = 1.0f;
+	// 회피 이동 방향
+	FVector dashDir;
 };
