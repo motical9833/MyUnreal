@@ -37,8 +37,10 @@ public:
 	void InputEvasion();
 	// 쿨타임 리셋
 	void ResetCoolDown();
+	// 무적 종료
+	void ResetInVulTime();
 	// 대쉬 시작
-	void StartDash();
+	void StartDash(float DeltaTime);
 	// 대쉬 끝
 	void StopDash();
 
@@ -63,6 +65,11 @@ public:
 	float coolDownRemaining = 0.0f;
 	bool isDvasion = false;
 	FTimerHandle coolDownTimerHandle;
+
+	// 회피 변수
+	FTimerHandle inVulTimerHandle;
+	float dashInVulTime = 0.5f;
+	float dashInVulRemaining = 0.0f;
 	// 회피 이동
 	float dashSpeed = 400.0f;
 	float dashDuration = 1.0f;

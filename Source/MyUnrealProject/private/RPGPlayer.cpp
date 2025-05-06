@@ -68,8 +68,7 @@ void ARPGPlayer::Tick(float DeltaTime)
 
 	if (isDvasion)
 	{
-		FVector NewLocation = GetActorLocation() + (dashDir * dashSpeed * DeltaTime);
-		SetActorLocation(NewLocation, true);
+		StartDash(DeltaTime);
 	}
 	else
 	{
@@ -118,12 +117,10 @@ void ARPGPlayer::InputEvasion()
 	if (!isDvasion && !GetCharacterMovement()->IsFalling())
 	{
 		isDvasion = true;
-		coolDownRemaining = delayDvasionTime;
 		// 바라보는 방향
 		dashDir = GetActorForwardVector();
 		GetWorldTimerManager().SetTimer(coolDownTimerHandle, this, &ARPGPlayer::ResetCoolDown, delayDvasionTime, false);
-		// 대쉬 처리
-		StartDash();
+		GetWorldTimerManager().SetTimer(inVulTimerHandle, this, &ARPGPlayer::ResetInVulTime, dashInVulTime, false);
 		// 애니메이션 실행
 		playerAnim->StartEvasionAnimation();
 		// 무적 적용
@@ -135,16 +132,17 @@ void ARPGPlayer::ResetCoolDown()
 {
 	isDvasion = false;
 	coolDownRemaining = 0.0f;
+}
+
+void ARPGPlayer::ResetInVulTime()
+{
 	playerAnim->InVulEnd();
 }
 
-void ARPGPlayer::StartDash()
+void ARPGPlayer::StartDash(float DeltaTime)
 {
-	//FVector NewLocation = GetActorLocation() + (dashDir * dashSpeed * detatime);
-	//SetActorLocation(NewLocation, true);
-
-	//FVector lauchVelocity = GetActorForwardVector() * 3000.0f;
-	//LaunchCharacter(lauchVelocity, true, false);
+	FVector NewLocation = GetActorLocation() + (dashDir * dashSpeed * DeltaTime);
+	SetActorLocation(NewLocation, true);
 }
 
 void ARPGPlayer::StopDash()
