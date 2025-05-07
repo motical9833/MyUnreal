@@ -75,4 +75,6 @@ public:
 	float dashDuration = 1.0f;
 	// 회피 이동 방향
 	FVector dashDir;
+
+	// 총알생성
 };
