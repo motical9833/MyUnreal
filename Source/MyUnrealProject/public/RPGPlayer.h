@@ -44,6 +44,10 @@ public:
 	// 대쉬 끝
 	void StopDash();
 
+	// 총알 발사 처리 함수
+	void BulletFire();
+	// 기본 공격 처리 함수
+	void InputAttack();
 
 	//UFUNCTION(BlueprintCallable, Category = "FSMEvent")
 public:
@@ -53,6 +57,9 @@ public:
 	class UCameraComponent* rpgCamComp;
 	UPROPERTY()
 	class UPlayerAnim* playerAnim;
+	// 플레이어 스켈레탈메시
+	UPROPERTY(VisibleAnywhere, Category = "PlayerMesh")
+	class USkeletalMeshComponent* playerMeshComp;
 
 	// 이동 속도
 	UPROPERTY(EditAnywhere, Category = "PlayerSetting")
@@ -76,5 +83,7 @@ public:
 	// 회피 이동 방향
 	FVector dashDir;
 
-	// 총알생성
+	// 총알 공장
+	UPROPERTY(EditDefaultsOnly, Category = "BulletFactory")
+	TSubclassOf<class ABullet> bulletFactory;
 };

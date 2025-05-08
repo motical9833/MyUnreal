@@ -55,12 +55,5 @@ void ABullet::BeginPlay()
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-
-	// 플레이어 이동
-	direction = FTransform(GetActorRotation()).TransformVector(direction);
-	SetActorLocation(direction);
-	direction = FVector::ZeroVector;
-
 }
 

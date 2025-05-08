@@ -9,6 +9,7 @@
 #include "PlayerAnim.h"
 #include "MyUnrealProject.h"
 #include "TimerManager.h"
+#include "Bullet.h"
 
 // Sets default values
 ARPGPlayer::ARPGPlayer()
@@ -22,7 +23,7 @@ ARPGPlayer::ARPGPlayer()
 	{
 		GetMesh()->SetSkeletalMesh(tempMesh.Object);
 		// 2. Mesh 컴포넌트의 위치와 회전값을 설정
-		GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -90.0f), FRotator(0.0f, -90.0f, 0.0f));
+		GetMesh()->SetRelativeLocationAndRotation(FVector(100.0f, 0.0f, -90.0f), FRotator(0.0f, -90.0f, 0.0f));
 	}
 
 	// 카메라 붙이기
@@ -92,6 +93,9 @@ void ARPGPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ARPGPlayer::InputJump);
 	// 회피 입력 이벤트 처리 함수 바인딩
 	PlayerInputComponent->BindAction(TEXT("Evasion"), IE_Pressed, this, &ARPGPlayer::InputEvasion);
+	// 기본 공격 입력 이벤트 처리 함수 바인딩
+	PlayerInputComponent->BindAction(TEXT("Attack"), IE_Pressed, this, &ARPGPlayer::InputAttack);
+
 }
 
 // 좌우 입력 이벤트 처리 함수
@@ -148,4 +152,17 @@ void ARPGPlayer::StartDash(float DeltaTime)
 void ARPGPlayer::StopDash()
 {
 	// 추후 필요시 추가 변경가능 -> 대쉬로 무적 회피후 공격하여 특수 공격 등등....
+}
+
+void ARPGPlayer::BulletFire()
+{
+	// 총알 발사 로직 처리
+	FTransform firePosition = GetMesh()->GetSocketTransform(TEXT("FirePosition"), RTS_World);
+	GetWorld()->SpawnActor<ABullet>(bulletFactory, firePosition);
+}
+
+void ARPGPlayer::InputAttack()
+{
+	// 기본 공격 로직 처리
+	BulletFire();
 }
