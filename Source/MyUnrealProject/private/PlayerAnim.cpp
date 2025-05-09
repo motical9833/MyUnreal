@@ -45,3 +45,8 @@ void UPlayerAnim::EndEvasionAnimation()
 {
 	isEvasion = false;
 }
+
+void UPlayerAnim::EndRightHandFireAnimation()
+{
+	isAttack = false;
+}

@@ -86,4 +86,10 @@ public:
 	// 총알 공장
 	UPROPERTY(EditDefaultsOnly, Category = "BulletFactory")
 	TSubclassOf<class ABullet> bulletFactory;
+
+	// 공격 체크 bool
+	bool isAttack = false;
+	// 노말 공격 순서 체크용 bool 배열
+	UPROPERTY(VisibleAnywhere, Category = "PlayerSetting")
+	TArray<bool> isNomalAttackArrs;
 };

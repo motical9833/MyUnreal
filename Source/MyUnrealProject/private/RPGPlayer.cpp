@@ -47,6 +47,9 @@ ARPGPlayer::ARPGPlayer()
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	// Yaw 기준 초당 720도 회전
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
+
+	// 기본 공격 체크 bool 배열 초기화
+	isNomalAttackArrs.Init(false, 4);
 }
 
 // Called when the game starts or when spawned
@@ -165,4 +168,5 @@ void ARPGPlayer::InputAttack()
 {
 	// 기본 공격 로직 처리
 	BulletFire();
+	playerAnim->StartAttackAnimation();
 }

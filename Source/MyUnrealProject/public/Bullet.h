@@ -24,7 +24,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	FVector direction;
+	FVector direction = {};
 
 	// 발사체의 이동을 담당할 컴포넌트
 	UPROPERTY(VisibleAnywhere, Category = "Movement")

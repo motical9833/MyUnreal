@@ -23,11 +23,16 @@ public:
 public:
 	void StartEvasionAnimation();
 	bool GetIsEvasion() { return isEvasion; }
+	bool GetIsAttack() { return isAttack; }
+	void StartAttackAnimation() { isAttack = true; }
 	void InVulEnd() { isInvul = false; }
 	void InVulStart() { isInvul = true; }
+	
 public:
 	UFUNCTION(BlueprintCallable, Category = "FSMEvent")
 	void EndEvasionAnimation();
+	UFUNCTION(BlueprintCallable, Category = "FSMEvent")
+	void EndRightHandFireAnimation();
 public:
 	// 플레이어
 	UPROPERTY()
@@ -55,4 +60,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
 	// 무적 상태인지
 	bool isInvul = false;
+	// 공격 상태인지
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerAnim")
+	bool isAttack = false;
 };
